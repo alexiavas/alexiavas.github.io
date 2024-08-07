@@ -5,7 +5,7 @@ title = "Chris Turner"
 disqusShortname = ""
 # Enable Google Analytics by entering your tracking code
 googleAnalytics = ""
-theme = "sustain"
+theme = "hugo-sustain"
 
 [permalinks]
   post = "/:year/:month/:day/:slug"
