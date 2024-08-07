@@ -1,7 +1,7 @@
 ---
 ---
 
-I'm **Chris Turner**, a Software Engineer.
+I'm **Chris Turner Vasilakis**, a Software Engineer.
 
 I love all things computer science and maths.
 
