@@ -1,172 +1,47 @@
-import { useState } from "react";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import Layout from "@/components/Layout";
 import PageHeader from "@/components/PageHeader";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-
-const formSchema = z.object({
-  firstName: z.string().min(2, "First name must be at least 2 characters"),
-  lastName: z.string().min(2, "Last name must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email address"),
-  subject: z.string().min(1, "Subject must not be empty"),
-  message: z.string(),
-});
-
-type FormValues = z.infer<typeof formSchema>;
+import { Mail } from "lucide-react";
 
 const Contact = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
-
-  const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      subject: "",
-      message: "",
-    },
-  });
-
-  const onSubmit = async (data: FormValues) => {
-    setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    
-    console.log("Form submitted:", data);
-    
-    // Show success message
-    toast({
-      title: "Message sent!",
-      description: "Thank you for reaching out. I'll get back to you as soon as possible.",
-    });
-    
-    // Reset form
-    form.reset();
-    setIsSubmitting(false);
-  };
-
   return (
     <Layout>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <PageHeader 
           title="Contact Me" 
-          subtitle="Have a question or want to work together? Send me a message."
+          subtitle="Let's connect! Here's how you can reach me."
         />
 
-        <div className="max-w-2xl mx-auto mb-16">
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <FormField
-                  control={form.control}
-                  name="firstName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>First Name</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Your first name" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="lastName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Last Name</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Your last name" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+        <div className="max-w-2xl mx-auto mb-16 text-center">
+          <div className="flex flex-col items-center justify-center gap-8 mb-12">
+            <div className="flex flex-col items-center">
+              <div className="p-4 rounded-full bg-gray-100 mb-4">
+                <Mail className="h-8 w-8 text-gray-700" />
               </div>
-
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input type="email" placeholder="your.email@example.com" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="subject"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Subject</FormLabel>
-                    <FormControl>
-                      <Input placeholder="What is this regarding?" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="message"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Message</FormLabel>
-                    <FormControl>
-                      <Textarea 
-                        placeholder="Your message here..." 
-                        className="min-h-32 resize-none"
-                        {...field} 
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <Button 
-                type="submit" 
-                className="w-full sm:w-auto px-8"
-                disabled={isSubmitting}
+              <h3 className="font-serif text-xl mb-2">Email</h3>
+              <p className="text-gray-600 mb-2">For inquiries and opportunities:</p>
+              <a 
+                href="mailto:contact@avasilaki.gr" 
+                className="font-medium text-black hover:underline"
               >
-                {isSubmitting ? "Sending..." : "Send Message"}
-              </Button>
-            </form>
-          </Form>
-        </div>
+                contact@avasilaki.gr
+              </a>
+            </div>
+          </div>
 
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="text-2xl font-serif font-medium mb-4">Connect With Me</h2>
-          <p className="text-gray-600 mb-6">
-            For professional inquiries, you can also reach me directly via email
-            at <a href="mailto:contact@avasilaki.gr" className="font-medium text-black hover:underline">
-              contact@avasilaki.gr
-            </a>
-          </p>
+          <div className="mt-12">
+            <p className="text-gray-600 max-w-lg mx-auto">
+              I'm always open to discussing new projects, opportunities, or collaborations. 
+              Feel free to reach out with any questions or just to say hello!
+            </p>
+            <div className="mt-6">
+              <a href="mailto:contact@avasilaki.gr">
+                <Button size="lg">
+                  Send Me an Email
+                </Button>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </Layout>
