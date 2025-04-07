@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -22,8 +21,8 @@ const formSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters"),
   lastName: z.string().min(2, "Last name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
-  subject: z.string().min(5, "Subject must be at least 5 characters"),
-  message: z.string().min(10, "Message must be at least 10 characters"),
+  subject: z.string().min(1, "Subject must not be empty"),
+  message: z.string(),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -164,8 +163,8 @@ const Contact = () => {
           <h2 className="text-2xl font-serif font-medium mb-4">Connect With Me</h2>
           <p className="text-gray-600 mb-6">
             For professional inquiries, you can also reach me directly via email
-            at <a href="mailto:contact@alexiavasilaki.com" className="font-medium text-black hover:underline">
-              contact@alexiavasilaki.com
+            at <a href="mailto:contact@avasilaki.gr" className="font-medium text-black hover:underline">
+              contact@avasilaki.gr
             </a>
           </p>
         </div>
